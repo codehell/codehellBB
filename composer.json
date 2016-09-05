@@ -1,0 +1,21 @@
+{
+    "name": "codehell/codehellbb",
+    "description": "Laravel Bulletin Board",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "codehell",
+            "email": "admin@wukong.es"
+        }
+    ],
+    "require": {
+        "rap2hpoutre/laravel-log-viewer": "^0.7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codehell\\Codehellbb\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

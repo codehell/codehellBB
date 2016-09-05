@@ -1,0 +1,9 @@
+admin(moderator(user(
+guest(ver foros)
+Ver usuario propio, modificar nombre propio, modificar email propio, modificar password propio, leer posts,
+crear posts, modificar posts propios vacios, borrar post propios vacios, crear commentarios, modificar comentarios
+propios sin respuesta, borrar comentarios propios sin respuesa)
+crear foros, editar foros propios, borrar foros propios vacios, ver usuarios, banear usuarios, borrar posts propios,
+borrar comentarios)
+cambiar nombre de foros, cambiar descripcion de foros, borrar foros, cambiar propietario de foros, modificar
+nombre de usuarios, modificar rol de usuarios,  editar posts, editar commentarios)
