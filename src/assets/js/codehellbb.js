@@ -22,7 +22,8 @@ $(document).ready(function () {
     });
 
     $('#myModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
+        $('#add_comment').removeAttr('disabled','disabled');
+        var button = $(event.relatedTarget); // Button that triggered the modal
         var form = $('#form-store');
         var url = form.data('store_action');
         var url_update = form.data('update_action');
@@ -65,5 +66,9 @@ $(document).ready(function () {
 
     $('#form-store').one('submit', function() {
         $(this).find('button[type="submit"]').attr('disabled','disabled');
+    });
+
+    $('#comment').parsley().on('field:success', function() {
+        $('#add_comment').removeAttr('disabled','disabled');
     });
 });

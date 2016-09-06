@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Codehell\\Codehellbb\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "minimum-stability": "dev"
 }

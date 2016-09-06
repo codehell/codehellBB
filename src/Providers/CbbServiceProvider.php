@@ -5,7 +5,7 @@ namespace Codehell\Codehellbb\Providers;
 use Codehell\Codehellbb\ViewComposers\ForumComposer;
 use Illuminate\Support\ServiceProvider;
 
-class CodehellbbServiceProvider extends ServiceProvider
+class CbbServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -33,6 +33,10 @@ class CodehellbbServiceProvider extends ServiceProvider
                 'codehellbb::forums.posts.edit'
             ], ForumComposer::class
         );
+
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/../routes/web.php';
+        }
     }
 
     /**
@@ -42,7 +46,5 @@ class CodehellbbServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        include __DIR__ . '/../routes/web.php';
-        include __DIR__ . '/../helpers.php';
     }
 }

@@ -49,11 +49,11 @@ Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Control
         require  __DIR__ . '/profiles.routes.php';
     });
 
-/*
+
     Route::group(['middleware' => 'is_admin'], function () {
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     });
-*/
+
     Route::get('pruebas', function() {
 
         /** @var \App\User $user */
