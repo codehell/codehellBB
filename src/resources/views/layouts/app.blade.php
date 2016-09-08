@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
 
+    @yield('styles')
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -46,7 +47,7 @@
                     &nbsp;<li><a href="{{ url('/home') }}">Home</a></li>
 
                     <li class="dropdown">
-                        <a href="{{ route('forums.index') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ trans('codehellbb::forum.link.forums') }} <span class="caret"></span>
                         </a>
 
@@ -126,9 +127,11 @@
     @include('codehellbb::partials.alerts')
     @yield('content')
 
-    <!-- Scripts -->
+    <script src="{{ asset('/js/app.js') }}"></script>
+
     @yield('scripts')
+
     <script src="{{ asset('codehell/codehellbb/js/codehellbb.js') }}"></script>
-    <script src="/js/app.js"></script>
+
 </body>
 </html>

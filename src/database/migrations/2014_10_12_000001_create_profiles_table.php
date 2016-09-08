@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCbbUsersTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,13 @@ class CreateCbbUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('cbb_users', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 64)->unique();
-            $table->string('email', 64)->unique();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('new_email', 64)->nullable();
             $table->enum('skill', ['Admin', 'Moderator', 'User', 'Guest']);
-            $table->string('password');
             $table->string('registration_token')->nullable();
-            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateCbbUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cbb_users');
+        Schema::drop('profiles');
     }
 }

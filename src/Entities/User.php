@@ -2,48 +2,25 @@
 
 namespace Codehell\Codehellbb\Entities;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\User as BaseUser;
 use PDO;
 
-class User extends Authenticatable
+class User extends BaseUser
 {
 
-    use Notifiable;
-
-    protected $table = 'cbb_users';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-
-    public function adminsAndModerators()
+    public function profile()
     {
-        return $this->where('skill','Admin')->orWhere('skill', 'Moderator')->get();
+        return $this->hasOne(Profile::class);
     }
 
-    public function skill()
+    public function getSkillAttribute()
     {
-        return $this->hasOne(Skill::class);
+        return $this->profile->skill;
     }
 
     public function relatedPosts()
     {
-        return $this->belongsToMany(Post::class, 'cbb_post_user')
+        return $this->belongsToMany(Post::class, 'post_user')
             ->withTimestamps()
             ->withPivot('visited_at');
     }
@@ -52,23 +29,23 @@ class User extends Authenticatable
     {
         \DB::connection()->setFetchMode(PDO::FETCH_ASSOC);
         $data = \DB::select("
-          SELECT cbb_posts.id, COUNT(cbb_comments.id) as nr_of_comments, cbb_forums.id as forum_id
-          FROM cbb_posts 
-          LEFT JOIN cbb_post_user on cbb_post_user.post_id = cbb_posts.id 
-          INNER JOIN cbb_comments ON cbb_posts.id = cbb_comments.post_id 
-          INNER JOIN cbb_forums ON cbb_forums.id = cbb_posts.forum_id
-          WHERE cbb_post_user.post_id IS null 
-          AND cbb_comments.created_at >= ?
-          GROUP BY cbb_posts.id
+          SELECT posts.id, COUNT(comments.id) as nr_of_comments, forums.id as forum_id
+          FROM posts 
+          LEFT JOIN post_user on post_user.post_id = posts.id 
+          INNER JOIN comments ON posts.id = comments.post_id 
+          INNER JOIN forums ON forums.id = posts.forum_id
+          WHERE post_user.post_id IS null 
+          AND comments.created_at >= ?
+          GROUP BY posts.id
           UNION
-          SELECT cbb_posts.id , COUNT(cbb_comments.id) as nr_of_comments, cbb_forums.id as forum_id 
-          FROM cbb_posts 
-          INNER JOIN cbb_post_user on cbb_post_user.post_id = cbb_posts.id 
-          INNER JOIN cbb_comments on cbb_posts.id = cbb_comments.post_id 
-          INNER JOIN cbb_users on cbb_post_user.user_id = cbb_users.id 
-          INNER JOIN cbb_forums ON cbb_forums.id = cbb_posts.forum_id
-          WHERE cbb_post_user.user_id = ? AND cbb_comments.created_at > visited_at 
-          GROUP BY cbb_posts.id
+          SELECT posts.id , COUNT(comments.id) as nr_of_comments, forums.id as forum_id 
+          FROM posts 
+          INNER JOIN post_user on post_user.post_id = posts.id 
+          INNER JOIN comments on posts.id = comments.post_id 
+          INNER JOIN users on post_user.user_id = users.id 
+          INNER JOIN forums ON forums.id = posts.forum_id
+          WHERE post_user.user_id = ? AND comments.created_at > visited_at 
+          GROUP BY posts.id
         
         ", [$this->created_at, $this->id]);
 

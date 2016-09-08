@@ -3,9 +3,10 @@
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Policies\ForumPolicies;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PoliciesTest extends TestCase
+class PoliciesTest extends Helpers
 {
     use DatabaseTransactions;
 

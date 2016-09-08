@@ -3,9 +3,10 @@
 use Codehell\Codehellbb\Entities\Comment;
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class UnreadForumsCommentsTest extends TestCase
+class UnreadForumsCommentsTest extends Helpers
 {
     use DatabaseTransactions;
     /**

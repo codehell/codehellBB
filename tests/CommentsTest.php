@@ -1,9 +1,10 @@
 <?php
 
 use Codehell\Codehellbb\Entities\Comment;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CommentsTest extends TestCase
+class CommentsTest extends Helpers
 {
 
     use DatabaseTransactions;
@@ -24,7 +25,7 @@ class CommentsTest extends TestCase
             'comment' => 'This is a comment',
         ]);
 
-        $this->seeInDatabase('cbb_comments',['comment' => 'This is a comment']);
+        $this->seeInDatabase('comments',['comment' => 'This is a comment']);
 
         $this->assertRedirectedToRoute('posts.show', [$forum->slug, $post->id]);
     }
@@ -42,7 +43,7 @@ class CommentsTest extends TestCase
             'comment' => 'This is a updated comment',
         ]);
 
-        $this->seeInDatabase('cbb_comments',['comment' => 'This is a updated comment']);
+        $this->seeInDatabase('comments',['comment' => 'This is a updated comment']);
     }
 
     public function test_delete_comment()
@@ -55,12 +56,12 @@ class CommentsTest extends TestCase
             'post_id' => $post->id,
             'user_id' => $user->id,
         ]);
-        $this->seeInDatabase('cbb_comments', [
+        $this->seeInDatabase('comments', [
             'id' => $comment->id
         ]);
         $this->actingAs($user)
             ->call('DELETE', route('comments.destroy', $comment));
-        $this->dontSeeInDatabase('cbb_comments', [
+        $this->dontSeeInDatabase('comments', [
             'id' => $comment->id
         ]);
     }

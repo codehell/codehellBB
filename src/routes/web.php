@@ -58,6 +58,6 @@ Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Control
 
         /** @var \App\User $user */
         $user = auth()->user();
-        dd($user->unvisitedPosts()->pluck('forum_id', 'id')->has());
+        dd($user->skill);
     });
 });

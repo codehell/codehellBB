@@ -16,12 +16,12 @@ class ProfilePolicies
 
     public function edit(User $auth_user, User $user)
     {
-        return hell_has_skill_or_more($user, 'Admin') || $auth_user->id === $user->id;
+        return hell_has_skill_or_more($auth_user, 'Admin') || $auth_user->id === $user->id;
     }
 
     public function update(User $auth_user, User $user)
     {
-        return hell_has_skill_or_more($user, 'Admin') || $auth_user->id === $user->id;
+        return hell_has_skill_or_more($auth_user, 'Admin') || $auth_user->id === $user->id;
     }
 
     public function updatePassword(User $auth_user, User $user)

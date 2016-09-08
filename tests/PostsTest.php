@@ -1,8 +1,9 @@
 <?php
 
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PostsTest extends TestCase
+class PostsTest extends Helpers
 {
 
     use DatabaseTransactions;
@@ -20,7 +21,7 @@ class PostsTest extends TestCase
             ->type('Contenido del post de los posts', 'development')
             ->press('Save');
 
-        $this->seeInDatabase('cbb_posts', [
+        $this->seeInDatabase('posts', [
             'title' => 'El post de los posts',
             'content' => 'Contenido del post de los posts'
         ]);
@@ -58,7 +59,7 @@ class PostsTest extends TestCase
             ->seePageIs(route('posts.show', [$forum->slug, $post]))
             ->see(trans('codehellbb::forum.alert.update_post'));
 
-        $this->seeInDatabase('cbb_posts', [
+        $this->seeInDatabase('posts', [
            'title' => 'This is the new title od the post',
             'content' => 'This is the new content of the post'
         ]);
@@ -71,7 +72,7 @@ class PostsTest extends TestCase
         $forum = $data['forum'];
         $post = $data['post'];
 
-        $this->seeInDatabase('cbb_posts', [
+        $this->seeInDatabase('posts', [
             'title' => $post->title,
             'content' => $post->content,
         ]);
@@ -83,7 +84,7 @@ class PostsTest extends TestCase
             ->press(trans('codehellbb::forum.button.yes'));
         $this->seePageIs(route('forums.show', $forum->slug))
             ->see(trans('codehellbb::forum.alert.delete_post'));
-        $this->dontSeeInDatabase('cbb_posts', [
+        $this->dontSeeInDatabase('posts', [
             'title' => $post->title,
             'content' => $post->content,
         ]);

@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forum extends Model
 {
-
-    protected $table = 'cbb_forums';
-
     public function user()
     {
         return $this->belongsTo(User::class);

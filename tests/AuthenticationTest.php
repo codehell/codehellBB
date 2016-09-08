@@ -1,11 +1,11 @@
 <?php
 
-
+use Codehell\Codehellbb\Entities\User;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class AuthenticationTest extends TestCase
+class AuthenticationTest extends Helpers
 {
-
     use DatabaseTransactions;
 
     public function testRegister()

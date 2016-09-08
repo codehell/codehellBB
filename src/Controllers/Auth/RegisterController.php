@@ -3,6 +3,7 @@
 namespace Codehell\Codehellbb\Controllers\Auth;
 
 
+use Codehell\Codehellbb\Entities\Profile;
 use Codehell\Codehellbb\Entities\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -74,14 +75,19 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = new User;
+        $profile = new Profile;
+
+        $profile->skill = 'Guest';
+        $profile->registration_token = str_random(60);
+
         $user->name = trim($data['name']);
         $user->email = trim($data['email']);
-        $user->skill = 'Guest';
-        $user->registration_token = str_random(60);
         $user->password = bcrypt($data['password']);
-        hell_email_sender($user);
-        $user->save();
 
+        $user->save();
+        $profile->user()->associate($user);
+        $profile->save();
+        hell_email_sender($user);
         return $user;
     }
 

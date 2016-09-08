@@ -1,9 +1,10 @@
 <?php
 
 use Codehell\Codehellbb\Entities\User;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ProfileTest extends TestCase
+class ProfileTest extends Helpers
 {
     use DatabaseTransactions;
     /**
@@ -20,7 +21,7 @@ class ProfileTest extends TestCase
             ->type('Another Name', 'name')
             ->press('update_name')
             ->seePageIs(route('profiles.edit', $user))
-            ->seeInDatabase('cbb_users', [ 'name' => 'Another Name']);
+            ->seeInDatabase('users', [ 'name' => 'Another Name']);
     }
 
     public function test_edit_password_profile()
@@ -63,22 +64,23 @@ class ProfileTest extends TestCase
             ->visit(route('profiles.edit', $user))
             ->type('admin@codehell.info', 'email')
             ->press('update_email')
-            ->seeInDatabase('cbb_users', ['new_email' => 'admin@codehell.info']);
+            ->seeInDatabase('profiles', ['new_email' => 'admin@codehell.info']);
     }
 
     public function test_email_confirmation()
     {
         $token = str_random(60);
-        $user = factory(User::class)->create([
+        $user = $this->createUser('Admin');
+        $profile = $user->profile;
+        $profile->registration_token = $token;
+        $profile->save();
+        $this->seeInDatabase('profiles', [
+            'user_id' => $user->id,
             'registration_token' => $token,
         ]);
-        $this->seeInDatabase('cbb_users', [
-            'id' => $user->id,
-            'registration_token' => $user->registration_token
-        ]);
-        $this->actingAs($user)->call('GET', route('confirmation', $user->registration_token));
-        $this->seeInDatabase('cbb_users', [
-            'id' => $user->id,
+        $this->actingAs($user)->call('GET', route('confirmation', $profile->registration_token));
+        $this->seeInDatabase('profiles', [
+            'user_id' => $user->id,
             'registration_token' => null
         ]);
     }

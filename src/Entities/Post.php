@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-
-    protected $table = 'cbb_posts';
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

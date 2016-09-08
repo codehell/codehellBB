@@ -1,5 +1,5 @@
 <?php
-
+namespace Codehell\Codehellbb\database\seeds;
 use Codehell\Codehellbb\Entities\Comment;
 use Illuminate\Database\Seeder;
 

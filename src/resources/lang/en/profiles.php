@@ -16,7 +16,6 @@ return [
     ],
 
     'alert' => [
-        'password_change' => 'The password was update successfully',
         'incorrect_password' => 'The password is incorrect',
     ]
 ];

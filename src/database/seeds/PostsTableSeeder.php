@@ -1,4 +1,5 @@
 <?php
+namespace Codehell\Codehellbb\database\seeds;
 
 use Codehell\Codehellbb\Entities\Post;
 use Illuminate\Database\Seeder;

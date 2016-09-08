@@ -2,6 +2,7 @@
 
 namespace Codehell\Codehellbb\Controllers\Frms;
 
+use Codehell\Codehellbb\Entities\Profile;
 use Codehell\Codehellbb\Entities\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,7 +79,7 @@ class ProfilesController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         Log::info('The user ' . $request->user()->name . ' updated the user ' . $user->name . ' password');
-        return redirect()->back()->with('success', trans('codehellbb::profiles.alert.password_change'));
+        return redirect()->back()->with('success', trans('codehellbb::forum.alert.password_updated'));
     }
     
     /**
@@ -92,15 +93,16 @@ class ProfilesController extends Controller
         $this->validate($request, [
             'email' => 'required|email|max:63|unique:users',
         ]);
-
-        $user->registration_token = str_random(60);
-        $user->new_email = $request->email;
+        $profile = $user->profile;
+        $profile->registration_token = str_random(60);
+        $profile->new_email = $request->email;
         $user->save();
+        $profile->save();
         Log::info('The user ' . $request->user()->name . ' updated the user ' . $user->name . ' email');
         hell_email_sender($user);
 
         return redirect()->route('profiles.edit', $user)
-            ->with('info', trans('codehellbb::users.alerts.change_password_info'));
+            ->with('info', trans('codehellbb::forum.alert.email_updated'));
     }
     /**
      * @param Request $request
@@ -110,33 +112,36 @@ class ProfilesController extends Controller
     public function updateRole(Request $request, User $user)
     {
         $this->authorize('updateRole', $user);
+        $profile = $user->profile;
         $skills = array_flip(config('codehellbb.skills'));
-        $user->skill = $skills[$request->skill];
-        $user->save();
+        $profile->skill = $skills[$request->skill];
+        $profile->save();
         Log::notice('The user ' . $request->user()->name . ' updated the user ' . $user->name . ' role');
         return redirect()->back()->with('success', 'Role Updated');
     }
 
     public function getConfirmation($token)
     {
-        $user = User::where('registration_token', $token)->firstOrFail();
-        if ($user->new_email != null) {
-            $user->email = $user->new_email;
-            $user->new_email = null;
+        $profile = Profile::where('registration_token', $token)->firstOrFail();
+        $user = $profile->user;
+        if ($profile->new_email != null) {
+            $user->email = $profile->new_email;
+            $profile->new_email = null;
         }
         else {
-            $user->skill = 'User';
+            $profile->skill = 'User';
         }
 
-        $user->registration_token = null;
+        $profile->registration_token = null;
         $user->save();
+        $profile->save();
         Log::info('The user ' . $user->name . ' confirmed his email');
-        return redirect('/')->with('success', trans('codehellbb::forum.email.confirmed'));
+        return redirect('/login')->with('success', trans('codehellbb::forum.email.confirmed'));
     }
 
     public function askForConfirmationCode(User $user)
     {
-        if (is_null($user->registration_token)) {
+        if (is_null($user->profile->registration_token)) {
             return redirect()->back()->with('warning', trans('forum.alert.confirmation_already'));
         }
         hell_email_sender($user);

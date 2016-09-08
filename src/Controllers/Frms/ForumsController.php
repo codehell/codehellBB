@@ -98,8 +98,7 @@ class ForumsController extends Controller
     public function edit(Forum $forum)
     {
         $this->authorize('update', $forum);
-        $users = new User;
-        $allowed_users = $users->adminsAndModerators();
+        $allowed_users = hell_admins_and_moderators();
         return view('codehellbb::forums/edit', [
             'forum' => $forum,
             'users' => $allowed_users
@@ -126,7 +125,7 @@ class ForumsController extends Controller
 
         if (Gate::allows('changeOwner', $forum)){
             $this->validate($request, [
-                'owner'=> 'required|exists:cbb_users,id'
+                'owner'=> 'required|exists:users,id'
             ]);
             $forum->user_id = $request->owner;
         }

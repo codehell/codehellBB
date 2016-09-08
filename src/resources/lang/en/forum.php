@@ -75,7 +75,9 @@ return [
         'comment_deleted' => 'The comment was deleted successfully',
         'comment_updated' => 'The comment was updated successfully',
         'confirmation_sent' => 'The confirmation email was sent',
-        'confirmation_already' => 'Your email has already been confirmed'
+        'confirmation_already' => 'Your email has already been confirmed',
+        'password_updated'  => 'Your password was updated successfully',
+        'email_updated'     => 'Your email was updated successfully. Please, remember to confirm them',
     ],
 
     'delete_confirmation' => 'Are you sure to delete?',

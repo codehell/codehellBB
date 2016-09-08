@@ -1,11 +1,10 @@
 <?php
 
 use Codehell\Codehellbb\Policies\ProfilePolicies;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ProfilePoliciesTest extends TestCase
+class ProfilePoliciesTest extends Helpers
 {
     use DatabaseTransactions;
 

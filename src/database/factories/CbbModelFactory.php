@@ -11,19 +11,26 @@
 |
 */
 
-$factory->define(Codehell\Codehellbb\Entities\User::class, function (Faker\Generator $faker) {
+use Codehell\Codehellbb\Entities\User;
+use Codehell\Codehellbb\Entities\Profile;
+use Codehell\Codehellbb\Entities\Forum;
+use Codehell\Codehellbb\Entities\Post;
+
+$factory->define(User::class, function (Faker\Generator $faker) {
     
     return [
         'name'      => $faker->userName,
         'email'     => $faker->safeEmail,
-        'skill'     => $faker->randomElement(['Admin', 'Moderator', 'User', 'Guest']),
         'password'  => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];
 });
 
-$factory->define(Codehell\Codehellbb\Entities\Forum::class, function (Faker\Generator $faker){
-    $users = Codehell\Codehellbb\Entities\User::all();
+$factory->define(Profile::class, function () {
+    return [];
+});
+$factory->define(Forum::class, function (Faker\Generator $faker){
+    $users = User::all();
     $name = $faker->text(64);
     $slug = str_slug($name, '-');
     return [
@@ -34,9 +41,9 @@ $factory->define(Codehell\Codehellbb\Entities\Forum::class, function (Faker\Gene
     ];
 });
 
-$factory->define(\Codehell\Codehellbb\Entities\Post::class, function (\Faker\Generator $faker) {
-    $users = Codehell\Codehellbb\Entities\User::all();
-    $forums = Codehell\Codehellbb\Entities\Forum::all();
+$factory->define(Post::class, function (\Faker\Generator $faker) {
+    $users = User::all();
+    $forums = Forum::all();
     return [
         'title' => $faker->text(127),
         'content' => $faker->text(500),
@@ -47,8 +54,8 @@ $factory->define(\Codehell\Codehellbb\Entities\Post::class, function (\Faker\Gen
 });
 
 $factory->define(\Codehell\Codehellbb\Entities\Comment::class, function(\Faker\Generator $faker) {
-    $users = Codehell\Codehellbb\Entities\User::all();
-    $posts = Codehell\Codehellbb\Entities\Post::all();
+    $users = User::all();
+    $posts = Post::all();
     return [
         'comment' => $faker->text(400),
         'user_id' => $users->random()->id,

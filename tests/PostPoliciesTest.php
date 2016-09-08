@@ -1,12 +1,12 @@
 <?php
 
-
 use Codehell\Codehellbb\Entities\Comment;
 use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Policies\PostPolicies;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PostPoliciesTest extends TestCase
+class PostPoliciesTest extends Helpers
 {
     use DatabaseTransactions;
 

@@ -14,12 +14,18 @@ class CbbServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (! $this->app->routesAreCached()) {
+            require __DIR__.'/../routes/web.php';
+        }
+
         $this->publishes([
             __DIR__ . '/../config/codehellbb.php' => config_path('codehellbb.php')
         ], 'config_hell');
+
         $this->publishes([
             __DIR__ . '/../assets' => public_path('codehell/codehellbb'),
         ], 'public_hell');
+
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'codehellbb');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'codehellbb');
@@ -33,10 +39,6 @@ class CbbServiceProvider extends ServiceProvider
                 'codehellbb::forums.posts.edit'
             ], ForumComposer::class
         );
-
-        if (! $this->app->routesAreCached()) {
-            require __DIR__.'/../routes/web.php';
-        }
     }
 
     /**

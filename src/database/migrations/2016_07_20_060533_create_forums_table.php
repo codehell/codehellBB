@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCbbForumsTable extends Migration
+class CreateForumsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateCbbForumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cbb_forums', function (Blueprint $table) {
+        Schema::create('forums', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 64)->unique();
             $table->text('description');
             $table->string('slug')->unique();
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('cbb_users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('disabled')->default(false);
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateCbbForumsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cbb_forums');
+        Schema::drop('forums');
     }
 }

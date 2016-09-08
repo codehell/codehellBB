@@ -1,9 +1,10 @@
 <?php
 
-use Codehell\Codehellbb\Entities\Post;
-use Codehell\Codehellbb\Skills;
-use Codehell\Codehellbb\Entities\User;
 use Carbon\Carbon;
+use Codehell\Codehellbb\Skills;
+use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Entities\User;
+use Codehell\Codehellbb\Entities\Profile;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 if (! function_exists('hell_email_sender')) {
@@ -13,7 +14,7 @@ if (! function_exists('hell_email_sender')) {
      */
     function hell_email_sender(User $user)
     {
-        $url = route('confirmation', ['token' => $user->registration_token]);
+        $url = route('confirmation', ['token' => $user->profile->registration_token]);
         Mail::send('codehellbb::emails/registration', compact('user', 'url'), function ($m) use ($user) {
             $m->to($user->email, $user->name)->subject(trans('codehellbb::forums.email.activation'));
         });
@@ -36,7 +37,7 @@ if (! function_exists('hell_has_skill_or_more')) {
             'Guest' => Skills::GUEST
         ];
 
-        return $skills[$user->skill] >= $skills[$skill];
+        return $skills[$user->profile->skill] >= $skills[$skill];
     }
 }
 
@@ -124,5 +125,15 @@ if (! function_exists('hell_act')) {
     {
         return hell_unread_comments_counter($counter, null, $forum_id) ||
         hell_has_new_post($new_posts, $forum_id);
+    }
+}
+
+if (! function_exists('hell_admins_and_moderators')) {
+
+    function hell_admins_and_moderators()
+    {
+        return Profile::join('users', 'profiles.user_id', '=', 'users.id')
+            ->where('skill', 'Admin')
+            ->orWhere('skill', 'Moderator')->get();
     }
 }

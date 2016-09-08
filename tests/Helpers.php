@@ -1,42 +1,27 @@
 <?php
 
+namespace Codehell\Testsbb;
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Entities\Profile;
 use Codehell\Codehellbb\Entities\User;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+class Helpers extends \TestCase
 {
-    /**
-     * The base URL to use while testing the application.
-     *
-     * @var string
-     */
-    protected $baseUrl = 'http://localhost';
-
     protected $name = 'Damumo';
     protected $email = 'admin@codehell.com';
     protected $password = 'secret';
 
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__ . '/../bootstrap/app.php';
-
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
-        return $app;
-    }
-
     protected function createUser($skill)
     {
-        return factory(User::class)->create([
-            'skill' => $skill,
+        $user = factory(User::class)->create([
             'password' => bcrypt($this->password),
         ]);
+        factory(Profile::class)->create([
+            'user_id' => $user->id,
+            'skill' => $skill,
+        ]);
+        return $user;
     }
 
     protected function createUserForumPost()

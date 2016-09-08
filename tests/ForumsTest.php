@@ -2,9 +2,10 @@
 
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
+use Codehell\Testsbb\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ForumsTest extends TestCase
+class ForumsTest extends Helpers
 {
 
     use DatabaseTransactions;
@@ -22,7 +23,7 @@ class ForumsTest extends TestCase
             ->press('Save')
             ->see('Primera División');
 
-        $this->seeInDatabase('cbb_forums',[
+        $this->seeInDatabase('forums',[
             'name' => 'Primera División',
             'description' => 'El foro de la Primera división',
             'user_id' => $user->id,
@@ -50,7 +51,7 @@ class ForumsTest extends TestCase
             ->press('Update')
             ->seePageIs(route('forums.show', $forum->slug));
 
-        $this->seeInDatabase('cbb_forums',[
+        $this->seeInDatabase('forums',[
             'name'      => 'Another forum name',
             'description'=> 'A description for the forum',
             'user_id'   => $moderator->id
@@ -63,7 +64,7 @@ class ForumsTest extends TestCase
         $forum = factory(Forum::class)->create([
             'user_id' => $user->id
         ]);
-        $this->seeInDatabase('cbb_forums',[
+        $this->seeInDatabase('forums',[
             'name'      => $forum->name,
             'description'=> $forum->description,
             'user_id'   => $user->id
@@ -78,7 +79,7 @@ class ForumsTest extends TestCase
             ->click('Edit')
             ->press('delete_confirm');
 
-        $this->dontSeeInDatabase('cbb_forums',[
+        $this->dontSeeInDatabase('forums',[
             'id'      => $forum->id,
         ]);
     }
