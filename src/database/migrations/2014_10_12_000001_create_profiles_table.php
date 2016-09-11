@@ -19,6 +19,8 @@ class CreateProfilesTable extends Migration
             $table->string('new_email', 64)->nullable();
             $table->enum('skill', ['Admin', 'Moderator', 'User', 'Guest']);
             $table->string('registration_token')->nullable();
+            $table->boolean('banned')->default(false);
+            $table->string('ban_reason')->nullable();
             $table->timestamps();
         });
     }

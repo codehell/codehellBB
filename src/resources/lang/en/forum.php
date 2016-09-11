@@ -25,7 +25,10 @@ return [
         'latest' => 'Latest posts',
         'edit_post' => 'Please, do not change the meaning of the publication',
         'add_comment' => 'Write a comment',
-        'change_email'=> 'Change Email'
+        'change_email'=> 'Change Email',
+        'ban_user'  => 'Banned users cant write posts or comments',
+        'ban_reason'=> 'The reason for ban the user',
+        'banned_user' => 'This user are banned',
     ],
 
     'button' => [
@@ -39,7 +42,8 @@ return [
         'cancel' => 'Cancel',
         'edit'   => 'Edit',
         'close'  => 'Close',
-        'search' => 'Search'
+        'search' => 'Search',
+        'ban' => 'Ban'
     ],
 
     'label' => [
@@ -78,8 +82,10 @@ return [
         'confirmation_already' => 'Your email has already been confirmed',
         'password_updated'  => 'Your password was updated successfully',
         'email_updated'     => 'Your email was updated successfully. Please, remember to confirm them',
+        'user_banned'        => 'The user was baned successfully',
     ],
 
     'delete_confirmation' => 'Are you sure to delete?',
+    'banned_user_message' => 'Please contact the administrator in: ' . config('codehellbb.superadmin_user_email'),
 
 ];

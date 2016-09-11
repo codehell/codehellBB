@@ -36,7 +36,7 @@
                     <a href="{{ route('posts.show', [$post->forum->slug, $post]) }}"
                        id="show_post_{{ $post->id }}">
                         @if(hell_is_new_post($new_posts, $post->id))
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                         @endif
                         {{ $post->title . " ({$post->user->name})"}}
                     </a>

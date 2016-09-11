@@ -1,7 +1,6 @@
 <?php
 
-use Codehell\Codehellbb\Entities\User;
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProfileTest extends Helpers
@@ -82,6 +81,22 @@ class ProfileTest extends Helpers
         $this->seeInDatabase('profiles', [
             'user_id' => $user->id,
             'registration_token' => null
+        ]);
+    }
+
+    public function test_ban_user()
+    {
+        $admin = $this->createUser('Admin');
+        $user = $this->createUser('User');
+        $this->actingAs($admin)
+            ->visit(route('profiles.edit', $user->id))->type('ban test', 'ban_reason')
+            ->press('ban_user')
+            ->see(trans('codehellbb::forum.alert.user_banned'));
+
+        $this->seeInDatabase('profiles', [
+            'user_id' => $user->id,
+            'banned' => true,
+            'ban_reason' => 'ban test'
         ]);
     }
 }

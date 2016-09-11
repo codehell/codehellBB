@@ -1,11 +1,10 @@
 <?php
 
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PostsTest extends Helpers
 {
-
     use DatabaseTransactions;
 
     public function test_create_post()

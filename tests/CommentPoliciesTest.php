@@ -2,7 +2,7 @@
 
 use Codehell\Codehellbb\Entities\Comment;
 use Codehell\Codehellbb\Policies\CommentPolicies;
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentPoliciesTest extends Helpers

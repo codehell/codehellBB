@@ -39,4 +39,8 @@ class ProfilePolicies
         return hell_has_skill_or_more($user, 'Admin');
     }
 
+    public function banUser(User $user)
+    {
+        return hell_has_skill_or_more($user, 'Admin');
+    }
 }

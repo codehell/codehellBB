@@ -1,12 +1,11 @@
 <?php
 
 use Codehell\Codehellbb\Entities\Comment;
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentsTest extends Helpers
 {
-
     use DatabaseTransactions;
 
     public function test_create_comment()

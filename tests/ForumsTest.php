@@ -2,12 +2,11 @@
 
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ForumsTest extends Helpers
 {
-
     use DatabaseTransactions;
 
     public function test_create_forum()

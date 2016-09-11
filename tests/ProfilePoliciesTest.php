@@ -1,7 +1,7 @@
 <?php
 
 use Codehell\Codehellbb\Policies\ProfilePolicies;
-use Codehell\Testsbb\Helpers;
+use Codehell\Codehellbb\tests\Helpers;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProfilePoliciesTest extends Helpers

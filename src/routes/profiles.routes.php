@@ -31,3 +31,8 @@ Route::get('{user}/send-confirmation', [
     'uses' => 'ProfilesController@askForConfirmationCode',
     'as'   => 'profiles.send_confirmation_code'
 ]);
+
+Route::patch('{user}/ban', [
+    'uses' => 'ProfilesController@banUser',
+    'as' => 'profiles.ban_user'
+]);

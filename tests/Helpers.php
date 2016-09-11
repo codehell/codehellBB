@@ -1,6 +1,6 @@
 <?php
 
-namespace Codehell\Testsbb;
+namespace Codehell\Codehellbb\tests;
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Entities\Profile;

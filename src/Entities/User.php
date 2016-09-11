@@ -13,11 +13,6 @@ class User extends BaseUser
         return $this->hasOne(Profile::class);
     }
 
-    public function getSkillAttribute()
-    {
-        return $this->profile->skill;
-    }
-
     public function relatedPosts()
     {
         return $this->belongsToMany(Post::class, 'post_user')
@@ -57,5 +52,15 @@ class User extends BaseUser
         return Post::select()
             ->whereNotIn('id', $this->relatedPosts()->pluck('post_id'))
             ->where('created_at', '>=', $this->created_at);
+    }
+
+    public function getSkillAttribute()
+    {
+        return $this->profile->skill;
+    }
+
+    public function getBanReasonAttribute()
+    {
+        return $this->profile->ban_reason;
     }
 }

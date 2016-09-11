@@ -11,6 +11,8 @@
 |
 */
 
+use Codehell\Codehellbb\Entities\Post;
+
 Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Controllers'], function () {
 
     Route::get('/home', 'HomeController@index');
@@ -41,11 +43,11 @@ Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Control
         'as'    => 'confirmation'
     ]);
 
-    Route::group(['middleware' => ['auth', 'forum'], 'namespace' => 'Frms'], function(){
+    Route::group(['middleware' => ['auth', 'forum', 'is_banned'], 'namespace' => 'Frms'], function(){
       require __DIR__ . '/forums.routes.php';
     });
 
-    Route::group(['middleware' => 'auth', 'namespace' => 'Frms', 'prefix' => 'profiles'], function () {
+    Route::group(['middleware' => ['auth', 'is_banned'], 'namespace' => 'Frms', 'prefix' => 'profiles'], function () {
         require  __DIR__ . '/profiles.routes.php';
     });
 
@@ -54,10 +56,23 @@ Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Control
         Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     });
 
+    Route::get('{user}/banned-message', function () {
+        return view('codehellbb::profiles.banned');
+    })->name('profiles.ban_message');
+
     Route::get('pruebas', function() {
 
-        /** @var \App\User $user */
-        $user = auth()->user();
-        dd($user->skill);
+        $post = Post::find(21);
+        $comments = $post->postComments()->with('children')->get();
+        function art ($comments) {
+            foreach($comments as $comment) {
+                echo "$comment->comment <hr>";
+                if (! $comment->children->isEmpty()) {
+                    $comments = $comment->children;
+                    art($comments);
+                }
+            }
+        };
+        art($comments);
     });
 });

@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <button name="update_email" type="submit" class="btn btn-primary">
-                        <i class="fa fa-btn fa-floppy-o" aria-hidden="true"></i>{{ trans('codehellbb::forum.button.update') }}
+                        {{ trans('codehellbb::forum.button.update') }}
                     </button>
                     <a href="{{ route('profiles.send_confirmation_code', $user) }}"
                        class="btn btn-default"

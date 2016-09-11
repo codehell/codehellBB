@@ -20,6 +20,9 @@
         @include('codehellbb::profiles/partials/edit_skill')
     @endcan
 
+    @can('banUser', $user)
+        @include('codehellbb::profiles/partials/ban_user')
+    @endcan
 </div>
 
 @endsection

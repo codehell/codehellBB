@@ -141,11 +141,21 @@ class ProfilesController extends Controller
 
     public function askForConfirmationCode(User $user)
     {
+        $this->authorize('updateEmail', $user);
         if (is_null($user->profile->registration_token)) {
             return redirect()->back()->with('warning', trans('forum.alert.confirmation_already'));
         }
         hell_email_sender($user);
         Log::info('The user ' . $user->name . ' ask for confirmation email');
         return redirect()->back()->with('success', trans('codehellbb::forum.alert.confirmation_sent'));
+    }
+
+    public function banUser(Request $request, User $user)
+    {
+        $this->authorize('banUser', $user);
+        $user->profile->banned = true;
+        $user->profile->ban_reason = $request->ban_reason;
+        $user->profile->save();
+        return redirect()->back()->with('success', trans('codehellbb::forum.alert.user_banned'));
     }
 }
