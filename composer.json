@@ -16,12 +16,12 @@
         "psr-4": {
             "Codehell\\Codehellbb\\": "src/"
         },
-        "autoload-dev": {
-            "Codehell\\Testsbb\\": "tests/"
-        },
         "files": [
             "src/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "Codehell\\Testsbb\\": "tests/"
     },
     "minimum-stability": "dev"
 }
