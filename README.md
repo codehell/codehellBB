@@ -8,17 +8,56 @@ ayudar a su desarroyo.
 
 Instalar:
  
- - Clonar proyecto
- - Ejecutar composer install en la carpeta del proyecto.
- - Configurar la base de datos.
- - Ejecutar las migraciones.
- - Registar un nuevo usuario y cambiarlo a Admin directamente en la base
-    de datos.
- - Tambien tienes diponibles seeders y tests para probar la aplicación
-    según el patron TDD.
- - Por defecto el foro con ID = 1 solo lo verán los usuarios con el rol
-    de Administrador pero puedes cambiar esto en el archivo forums.php
-    en la carpeta config.
+ 1 - Dentro de la carpeta de Laravel ejecutar:
+ 
+     composer require codehell/codehellbb=dev-master
+ 
+ 2 - Configurar .env la base de datos y el driver de email
+ 
+ 3 - Configurar el sistema de autentificación de laravel
+ 
+     php artisan make:auth
+ 
+ 4 - En Routes/web.php comentar la linea:
+ 
+     //Auth::routes();
+ 
+ 5 - En el archivo config/app añadir los providers:
+ 
+     Codehell\Codehellbb\Providers\CbbServiceProvider::class,
+     Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+ 
+ 6 - En el archivo config/auth.php cambiar el modelo de autentificacion
+ 
+     'providers' => [
+         'users' => [
+             'driver' => 'eloquent',
+             'model' => \Codehell\Codehellbb\Entities\User::class,
+         ],
+ 
+ 7 - Publicar los archivos de la aplicación
+ art vendor:publish --provider='Codehell\Codehellbb\Providers\CbbServiceProvider'
+ 
+ 8 - En el archivo app/HTTP/kernel.php añadir los siguientes middlewares:
+     protected $routeMiddleware = [
+         .
+         .
+         'is_admin' => \Codehell\Codehellbb\Middleware\IsAdmin::class,
+         'forum' => \Codehell\Codehellbb\Middleware\ForumAccessControl::class,
+         'is_banned' => \Codehell\Codehellbb\Middleware\IsBanned::class,
+     ]
+ 
+ 9 - Ejecutar las migraciones
+ 
+     php artisan migrate
+ 
+ 10 - Registrar un usuario y cambiarlo a Admin y cambiar el campo 'registration_token' a null en la tabla 'profiles' de la base de datos.
+ 
+ Acceder a http://my.web/forum
+ 
+ 11 - Disfruta de tu foro. (El primer foro que crees, sera solo accesible a los administradores, puedes cambiar esta configuración en:
+     config/codehellbb.php)
+
 
 Notas:
 
