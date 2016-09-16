@@ -20,10 +20,15 @@
                         </div>
                     </div>
                 </div>
-
-                <button name="ban_user" type="submit" class="btn btn-primary">
-                    {{ trans('codehellbb::forum.button.ban') }}
-                </button>
+                @if(! $user->profile->banned)
+                    <button name="ban_user" type="submit" class="btn btn-primary">
+                        {{ trans('codehellbb::forum.button.ban') }}
+                    </button>
+                @else
+                    <button name="unban_user" type="submit" class="btn btn-primary">
+                        {{ trans('codehellbb::forum.button.unban') }}
+                    </button>
+                @endif
             </form>
         </div>
     </div>

@@ -99,4 +99,27 @@ class ProfileTest extends Helpers
             'ban_reason' => 'ban test'
         ]);
     }
+
+    public function test_unban_user()
+    {
+        $admin = $this->createUser('Admin');
+        $user = $this->createUser('User');
+        $profile = $user->profile;
+        $profile->banned = true;
+        $profile->save();
+        $this->seeInDatabase('profiles', [
+            'user_id' => $user->id,
+            'banned'  => true,
+        ]);
+        $this->actingAs($admin)
+            ->visit('/profiles')
+            ->click($user->name)
+            ->press('unban_user')
+            ->see('The user was unbanned successfully');
+
+        $this->seeInDatabase('profiles', [
+            'user_id' => $user->id,
+            'banned'  => false,
+        ]);
+    }
 }

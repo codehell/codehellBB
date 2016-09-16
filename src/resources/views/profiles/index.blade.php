@@ -8,10 +8,12 @@
                     <div class="panel-heading">{{ trans('codehellbb::profiles.title.list') }}</div>
 
                     <div class="panel-body">
-                        @include('codehellbb::partials/alerts')
                         <ul>
                             @foreach($users as $user)
-                                <li><a href="{{ route('profiles.edit', $user->id) }}">{{ $user->name }}</a> - {{ $user->skill }}</li>
+                                <li>
+                                    <a href="{{ route('profiles.edit', $user->id) }}">{{ $user->name }}</a>
+                                    - {{ $user->skill }}  {{ $user->profile->banned ? ' - Banned' : '' }}
+                                </li>
                             @endforeach
                         </ul>
                     </div>

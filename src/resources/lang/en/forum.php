@@ -43,7 +43,8 @@ return [
         'edit'   => 'Edit',
         'close'  => 'Close',
         'search' => 'Search',
-        'ban' => 'Ban'
+        'ban' => 'Ban',
+        'unban' => 'Unban',
     ],
 
     'label' => [
@@ -82,7 +83,9 @@ return [
         'confirmation_already' => 'Your email has already been confirmed',
         'password_updated'  => 'Your password was updated successfully',
         'email_updated'     => 'Your email was updated successfully. Please, remember to confirm them',
-        'user_banned'        => 'The user was baned successfully',
+        'user_banned'       => 'The user was banned successfully',
+        'user_unbanned'     => 'The user was unbanned successfully',
+        'user_is_banned'    => 'This user is banned',
     ],
 
     'delete_confirmation' => 'Are you sure to delete?',

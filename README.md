@@ -3,7 +3,7 @@ Base forum for Laravel 5.3 projects.
 
 Este foro Se encuentra en la rama master y está en desarrollo.
 
-Aún así es funcional y puedes usarlo y mandarme pull requests si quieres
+Aún así es funcional, puedes usarlo y mandarme pull requests si quieres
 ayudar a su desarroyo.
 
 Instalar:
@@ -35,10 +35,12 @@ Instalar:
              'model' => \Codehell\Codehellbb\Entities\User::class,
          ],
  
- 7 - Publicar los archivos de la aplicación
- art vendor:publish --provider='Codehell\Codehellbb\Providers\CbbServiceProvider'
+ 7 - Publicar los archivos de la aplicación:
+ 
+    php artisan vendor:publish --provider='Codehell\Codehellbb\Providers\CbbServiceProvider'
  
  8 - En el archivo app/HTTP/kernel.php añadir los siguientes middlewares:
+ 
      protected $routeMiddleware = [
          .
          .
@@ -53,27 +55,30 @@ Instalar:
  
  10 - Registrar un usuario y cambiarlo a Admin y cambiar el campo 'registration_token' a null en la tabla 'profiles' de la base de datos.
  
- Acceder a http://my.web/forum
+ Acceder a http://my.web/forums
  
- 11 - Disfruta de tu foro. (El primer foro que crees, sera solo accesible a los administradores, puedes cambiar esta configuración en:
+ 11 - Disfruta de tus foros. (El primer foro que crees, será solo accesible a los administradores, puedes cambiar esta configuración en:
      config/codehellbb.php)
 
 
 Notas:
 
- - Los permisos de foros estan implementados de la manera mas sencilla
+ - Los permisos de foros están implementados de la manera mas sencilla
  posible y son incrementales, de tal manera que el Moderator puede 
  realizar las acciones del User y el Guest, a su vez el Admin puede 
  realizar todas las acciones de Moderator y algunas mas. 
- El archichivo Roles Doc.txt sirve como guia para los permisos
+ El archivo Roles Doc.txt sirve como guia para los permisos
  de cada rol, a los que el programa referencia como Skills. Los test:
  
- ForumPoliciesTest.php
- PostPoliciesTest.php
- CommentPoliciesTest.php
- ProfilePoliciesTest.php
+_ForumPoliciesTest.php_
  
- tambien pueden servirte como guia sobre que acciones puede realizar cada rol.
+_PostPoliciesTest.php_
+ 
+_CommentPoliciesTest.php_
+ 
+ _ProfilePoliciesTest.php_
+ 
+ también pueden servirte como guia sobre que acciones puede realizar cada rol.
 
 Copyright (c)
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation
