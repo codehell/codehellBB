@@ -23,6 +23,7 @@ class ProfilePoliciesTest extends Helpers
         $this->assertTrue($policies->updateEmail($user, $user));
         $this->assertFalse($policies->updateEmail($user, $another_user));
         $this->assertFalse($policies->updateRole($user));
+        $this->assertFalse($policies->banUser($user));
     }
 
     public function test_profile_policies_user()
@@ -40,6 +41,7 @@ class ProfilePoliciesTest extends Helpers
         $this->assertTrue($policies->updateEmail($user, $user));
         $this->assertFalse($policies->updateEmail($user, $another_user));
         $this->assertFalse($policies->updateRole($user));
+        $this->assertFalse($policies->banUser($user));
     }
 
     public function test_profile_policies_moderator()
@@ -57,6 +59,7 @@ class ProfilePoliciesTest extends Helpers
         $this->assertTrue($policies->updateEmail($user, $user));
         $this->assertFalse($policies->updateEmail($user, $another_user));
         $this->assertFalse($policies->updateRole($user));
+        $this->assertFalse($policies->banUser($user));
     }
 
     public function test_profile_policies_admin()
@@ -74,5 +77,6 @@ class ProfilePoliciesTest extends Helpers
         $this->assertTrue($policies->updateEmail($user, $user));
         $this->assertFalse($policies->updateEmail($user, $another_user));
         $this->assertTrue($policies->updateRole($user));
+        $this->assertTrue($policies->banUser($user));
     }
 }

@@ -17,7 +17,7 @@ class ForumPolicies
 
     public function show(User $user, Forum $forum)
     {
-        $forum_access = config('forums.forum_access');
+        $forum_access = config('codehell.forum_access');
         if (isset($forum_access[$forum->id])) {
             return hell_has_skill_or_more($user, $forum_access[$forum->id]);
         }

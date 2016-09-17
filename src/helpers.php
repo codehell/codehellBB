@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use Codehell\Codehellbb\Skills;
 use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Skills;
 use Codehell\Codehellbb\Entities\User;
 use Codehell\Codehellbb\Entities\Profile;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -75,7 +75,7 @@ if (! function_exists('hell_get_relation_sql')) {
 if (! function_exists('hell_unread_comments_counter')) {
     /**
      * @param array $counter
-     * @param $post
+     * @param Post $post
      * @param null $forum_id
      * @return array|int|mixed
      */
@@ -120,7 +120,7 @@ if (! function_exists('hell_has_new_post')) {
 }
 
 if (! function_exists('hell_act')) {
-    
+
     function hell_act($counter, $new_posts, $forum_id)
     {
         return hell_unread_comments_counter($counter, null, $forum_id) ||

@@ -60,19 +60,4 @@ Route::group(['middleware' => 'web', 'namespace' => 'Codehell\Codehellbb\Control
         return view('codehellbb::profiles.banned');
     })->name('profiles.ban_message');
 
-    Route::get('pruebas', function() {
-
-        $post = Post::find(21);
-        $comments = $post->postComments()->with('children')->get();
-        function art ($comments) {
-            foreach($comments as $comment) {
-                echo "$comment->comment <hr>";
-                if (! $comment->children->isEmpty()) {
-                    $comments = $comment->children;
-                    art($comments);
-                }
-            }
-        };
-        art($comments);
-    });
 });
