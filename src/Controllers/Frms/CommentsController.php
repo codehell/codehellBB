@@ -1,11 +1,12 @@
 <?php
 
 namespace Codehell\codehellbb\Controllers\Frms;
-use Codehell\Codehellbb\Entities\Comment;
-use Codehell\Codehellbb\Entities\Post;
-use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Entities\Comment;
 
 class CommentsController extends Controller
 {

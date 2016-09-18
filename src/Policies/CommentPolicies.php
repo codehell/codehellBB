@@ -3,7 +3,7 @@
 namespace Codehell\Codehellbb\Policies;
 
 use Codehell\Codehellbb\Entities\Comment;
-use Codehell\Codehellbb\Entities\User;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicies

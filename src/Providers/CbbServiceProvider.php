@@ -2,17 +2,17 @@
 
 namespace Codehell\Codehellbb\Providers;
 
-use Codehell\Codehellbb\ViewComposers\ForumComposer;
-use Codehell\Codehellbb\Entities\Comment;
-use Codehell\Codehellbb\Entities\Forum;
-use Codehell\Codehellbb\Entities\Post;
-use Codehell\Codehellbb\Entities\User;
-use Codehell\Codehellbb\Policies\CommentPolicies;
-use Codehell\Codehellbb\Policies\ForumPolicies;
-use Codehell\Codehellbb\Policies\PostPolicies;
-use Codehell\Codehellbb\Policies\ProfilePolicies;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\User;
 use Illuminate\Support\Facades\Gate;
+use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Entities\Forum;
+use Codehell\Codehellbb\Entities\Comment;
+use Codehell\Codehellbb\Policies\PostPolicies;
+use Codehell\Codehellbb\Policies\ForumPolicies;
+use Codehell\Codehellbb\Policies\CommentPolicies;
+use Codehell\Codehellbb\Policies\ProfilePolicies;
+use Codehell\Codehellbb\ViewComposers\ForumComposer;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 
 class CbbServiceProvider extends ServiceProvider

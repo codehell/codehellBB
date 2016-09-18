@@ -2,13 +2,13 @@
 
 namespace Codehell\Codehellbb\Controllers\Frms;
 
-use Codehell\Codehellbb\Entities\Profile;
-use Codehell\Codehellbb\Entities\User;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Codehell\Codehellbb\Entities\Profile;
 
 class ProfilesController extends Controller
 {

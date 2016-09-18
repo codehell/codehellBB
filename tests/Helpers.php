@@ -4,7 +4,7 @@ namespace Codehell\Codehellbb\tests;
 use Codehell\Codehellbb\Entities\Forum;
 use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Entities\Profile;
-use Codehell\Codehellbb\Entities\User;
+use App\User;
 
 class Helpers extends \TestCase
 {

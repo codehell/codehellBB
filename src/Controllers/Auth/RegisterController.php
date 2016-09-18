@@ -3,9 +3,9 @@
 namespace Codehell\Codehellbb\Controllers\Auth;
 
 
-use Codehell\Codehellbb\Entities\Profile;
-use Codehell\Codehellbb\Entities\User;
 use Validator;
+use Codehell\Codehellbb\Entities\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;

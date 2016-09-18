@@ -1,9 +1,9 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
-use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Skills;
-use Codehell\Codehellbb\Entities\User;
+use Codehell\Codehellbb\Entities\Post;
 use Codehell\Codehellbb\Entities\Profile;
 use Illuminate\Database\Eloquent\Relations\Relation;
 

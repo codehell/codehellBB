@@ -1,11 +1,10 @@
 <?php
 
 namespace Codehell\Codehellbb\Entities;
-
-use App\User as BaseUser;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use PDO;
 
-class User extends BaseUser
+class User extends Authenticatable
 {
 
     public function profile()

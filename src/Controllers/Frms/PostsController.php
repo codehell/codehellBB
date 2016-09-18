@@ -2,13 +2,11 @@
 
 namespace Codehell\Codehellbb\Controllers\Frms;
 
-use Codehell\Codehellbb\Entities\User;
 use Illuminate\Http\Request;
-use Codehell\Codehellbb\Entities\Forum;
-use Codehell\Codehellbb\Entities\Post;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Codehell\Codehellbb\Entities\Post;
+use Codehell\Codehellbb\Entities\Forum;
 
 class PostsController extends Controller
 {

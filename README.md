@@ -1,10 +1,10 @@
 Base forum for Laravel 5.3 projects.
 
 
-Este foro Se encuentra en la rama master y está en desarrollo.
+Este foro se encuentra en la rama master y está en desarollo.
 
 Aún así es funcional, puedes usarlo y mandarme pull requests si quieres
-ayudar a su desarroyo.
+ayudar a mejorarlo.
 
 Instalar:
  
@@ -27,13 +27,12 @@ Instalar:
      Codehell\Codehellbb\Providers\CbbServiceProvider::class,
      Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
  
- 6 - En el archivo config/auth.php cambiar el modelo de autentificacion
+6 - Hacer que el modelo de usuarios 'app/User' extienda de la clase Codehell\CodehellBB\User:
  
-     'providers' => [
-         'users' => [
-             'driver' => 'eloquent',
-             'model' => \Codehell\Codehellbb\Entities\User::class,
-         ],
+    use Codehell\Codehellbb\Entities\User as CodehellUser;
+    
+    class User extends CodehellUser
+    {
  
  7 - Publicar los archivos de la aplicación:
  
