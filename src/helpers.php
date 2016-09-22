@@ -137,3 +137,11 @@ if (! function_exists('hell_admins_and_moderators')) {
             ->orWhere('skill', 'Moderator')->get();
     }
 }
+
+if (! function_exists('hell_find_children')) {
+
+    function hell_find_children($collection, $parent_id)
+    {
+        return $collection->where('parent', $parent_id);
+    }
+}

@@ -44,8 +44,8 @@ class PostsController extends Controller
     {
         $this->authorize('show', $post);
         $forum = Forum::where('slug', $slug)->firstOrFail();
-        $comments = $post->postComments()->with('children')->get();
-
+        //$comments = $post->postComments()->with('children')->get();
+        $comments = $post->comments()->with('user')->get();
         hell_update_visit_time($post);
 
         return view('codehellbb::forums.posts.show', compact('forum', 'post', 'comments'));

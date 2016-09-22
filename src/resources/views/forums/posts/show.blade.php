@@ -13,7 +13,7 @@
         <div class="col-md-7">
             @include('codehellbb::forums/posts/partials/post')
             @include('codehellbb::forums/posts/partials/add_comment')
-            @include('codehellbb::forums/posts/partials/comments')
+            @include('codehellbb::forums/posts/partials/parents')
         </div>
     </div>
 </div>
