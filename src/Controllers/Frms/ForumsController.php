@@ -26,7 +26,7 @@ class ForumsController extends Controller
                 ->where('title', 'LIKE', "%$search%")
                 ->orWhere('content', 'LIKE', "%$search%")
                 ->with('user', 'forum')
-                ->paginate();
+                ->paginate()->appends(['search' => $search]);
         } else {
             $posts = Post::orderBy('created_at', 'DESC')
                 ->with('user', 'forum')
